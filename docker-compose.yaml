@@ -1,6 +1,6 @@
 services:
   db:
-    image: prepacr323.azurecr.io/postgres:latest
+    image: ece366acr.azurecr.io/postgres:latest
     build: db
     environment:
     - POSTGRES_DB=postgres
@@ -9,7 +9,7 @@ services:
     - 5432:5432
     restart: always
   app:
-    image: prepacr323.azurecr.io/springboot-app:latest
+    image: ece366acr.azurecr.io/springboot-app:latest
     build: server/rpsjdbc
     environment:
     - POSTGRES_DB=postgres
@@ -19,7 +19,7 @@ services:
     ports:
     - 8080:8080
   ui:
-    image: prepacr323.azurecr.io/rpsui:latest
+    image: ece366acr.azurecr.io/rpsui:latest
     build: rpsui
     depends_on:
     - app
