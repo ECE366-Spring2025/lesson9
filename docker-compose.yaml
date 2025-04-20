@@ -1,0 +1,54 @@
+apiVersion: 2019-12-01
+location: eastus
+name: rpsContainerGroup
+properties:
+  containers:
+  - name: db
+    properties:
+      image: ece366acr.azurecr.io/rpsdb:latest
+      environmentVariables:
+      - name: POSTGRES_USER
+        value: postgres
+      - name: POSTGRES_PASSWORD
+        value: password
+      resources:
+        requests:
+          cpu: 1
+          memoryInGb: 1.5
+      ports:
+      - port: 5432
+  - name: app
+    properties:
+      image: ece366acr.azurecr.io/rpsapp:latest
+      resources:
+        requests:
+          cpu: 1
+          memoryInGb: 1.5
+      ports:
+      - port: 8080
+  - name: ui
+    properties:
+      image: ece366acr.azurecr.io/rpsui:latest
+      resources:
+        requests:
+          cpu: 1
+          memoryInGb: 1.5
+      ports:
+      - port: 80
+  osType: Linux
+  ipAddress:
+    type: Public
+    dnsNameLabel: moosetracks  # Add your desired DNS name label here
+    ports:
+    - protocol: tcp
+      port: 5432
+    - protocol: tcp
+      port: 8080
+    - protocol: tcp
+      port: 80
+  imageRegistryCredentials:
+  - server: ece366acr.azurecr.io
+    username: 00000000-0000-0000-0000-000000000000
+    password: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkFNTDU6UUNMWjpCRDQ1OkRSRDI6RkdESTo3Q1NGOkdVUEI6V1RWQTpVVUtJOjRKN1Y6Mjc0QTpQSkRVIn0.eyJqdGkiOiI1Y2MxZWQzYi1hZWIxLTRhYWYtOTM4OC1iYmZkOWYzOTRjZjgiLCJzdWIiOiJDaHJpc3RvcGhlci5Ib25nQGNvb3Blci5lZHUiLCJuYmYiOjE3NDM5ODg4NDIsImV4cCI6MTc0NDAwMDU0MiwiaWF0IjoxNzQzOTg4ODQyLCJpc3MiOiJBenVyZSBDb250YWluZXIgUmVnaXN0cnkiLCJhdWQiOiJlY2UzNjZhY3IuYXp1cmVjci5pbyIsInZlcnNpb24iOiIxLjAiLCJyaWQiOiI3YWNkMDk5YjNkM2Q0Njk1YWMxMzNmNTA2MTQ0Nzg3YyIsImdyYW50X3R5cGUiOiJyZWZyZXNoX3Rva2VuIiwiYXBwaWQiOiIwNGIwNzc5NS04ZGRiLTQ2MWEtYmJlZS0wMmY5ZTFiZjdiNDYiLCJ0ZW5hbnQiOiI1ZDdhMjA4Mi02ODA3LTQxMTQtYjNlNi03ZTI0MWQxNDY5YTIiLCJwZXJtaXNzaW9ucyI6eyJhY3Rpb25zIjpbInJlYWQiLCJ3cml0ZSIsImRlbGV0ZSIsIm1ldGFkYXRhL3JlYWQiLCJtZXRhZGF0YS93cml0ZSIsImRlbGV0ZWQvcmVhZCIsImRlbGV0ZWQvcmVzdG9yZS9hY3Rpb24iXX0sInJvbGVzIjpbXX0.RqBmMHOIc0zfFyeeWdMdZU-efmSW5NRgJkpglfxe8NxASFc_Cl_ZwlPzd3dHOkcz_dDQMqwxW719SLwhIk7uYfsaM1rNo5JgmMQudo5LuKUMmnmfOIUS2NPMIXgztjuIISZKy1FLVqrDas9D4di8BU-2NrxLYMszmIlhr1WOquVgviSTx11APQWnlZL3COUZmCmEVC6GS0kH6NEER6WmGuicwSlQstff0spf0v-N46IFbhIu5rEi8w7NJHl8hkfcbf9fV8aUlRvhK799O6N2NbrX0MerYJArWGOkV5TgQrz2AbzZtEU8kq5J9I5zHrR2XapPugT6LIDYVj9_--XLnw
+tags: {exampleTag: tutorial}
+type: Microsoft.ContainerInstance/containerGroups
